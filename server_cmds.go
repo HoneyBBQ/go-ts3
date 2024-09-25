@@ -461,3 +461,16 @@ func (s *ServerMethods) ClientDBList() ([]*DBClient, error) {
 	}
 	return dbclients, nil
 }
+
+type Snapshot struct {
+	Version int    `ms:"version"`
+	Data    string `ms:"data"`
+}
+
+func (s *ServerMethods) SnapshotCreate() (*Snapshot, error) {
+	r := &Snapshot{}
+	if _, err := s.ExecCmd(NewCmd("serversnapshotcreate").WithResponse(r)); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
