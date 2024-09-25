@@ -9,7 +9,7 @@ Features
 Installation
 ------------
 ```sh
-go get -u github.com/multiplay/go-ts3
+go get -u github.com/honeybbq/go-ts3
 ```
 
 Examples
@@ -22,7 +22,7 @@ package main
 import (
 	"log"
 
-        "github.com/multiplay/go-ts3"
+        "github.com/honeybbq/go-ts3"
 )
 
 func main() {
@@ -43,10 +43,6 @@ func main() {
 	}
 }
 ```
-
-Documentation
--------------
-- [GoDoc API Reference](http://godoc.org/github.com/multiplay/go-ts3).
 
 License
 -------

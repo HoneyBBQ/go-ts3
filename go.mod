@@ -1,4 +1,4 @@
-module github.com/HoneyBBQ/go-ts3
+module github.com/honeybbq/go-ts3
 
 go 1.13
 
