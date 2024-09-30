@@ -1,6 +1,7 @@
 package ts3
 
 import (
+	"strings"
 	"time"
 )
 
@@ -472,5 +473,6 @@ func (s *ServerMethods) SnapshotCreate() (*Snapshot, error) {
 	if _, err := s.ExecCmd(NewCmd("serversnapshotcreate").WithResponse(r)); err != nil {
 		return nil, err
 	}
+	r.Data = strings.NewReplacer(`/`, `\/`).Replace(r.Data)
 	return r, nil
 }
