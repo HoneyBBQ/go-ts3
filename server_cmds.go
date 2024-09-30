@@ -466,13 +466,28 @@ func (s *ServerMethods) ClientDBList() ([]*DBClient, error) {
 type Snapshot struct {
 	Version int    `ms:"version"`
 	Data    string `ms:"data"`
+	Salt    string `ms:"salt"`
 }
 
-func (s *ServerMethods) SnapshotCreate() (*Snapshot, error) {
+func (s *ServerMethods) SnapshotCreate(password string) (*Snapshot, error) {
 	r := &Snapshot{}
-	if _, err := s.ExecCmd(NewCmd("serversnapshotcreate").WithResponse(r)); err != nil {
+	if _, err := s.ExecCmd(NewCmd("serversnapshotcreate").
+		WithArgs(NewArg("password", password)).
+		WithResponse(r)); err != nil {
 		return nil, err
 	}
 	r.Data = strings.NewReplacer(`/`, `\/`).Replace(r.Data)
 	return r, nil
+}
+
+func (s *ServerMethods) SnapshotDeploy(version, data, password string) error {
+	_, err := s.ExecCmd(
+		NewCmd("serversnapshotdeploy").
+			WithOptions("-keepfiles").
+			WithArgs(
+				NewArg("version", version),
+				NewArg("password", password),
+				NewArg("data", data),
+			))
+	return err
 }
