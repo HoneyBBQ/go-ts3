@@ -404,7 +404,7 @@ func testCmdsServer(t *testing.T, c *Client) {
 
 	serversnapshotcreate := func(t *testing.T) {
 		t.Helper()
-		snapshot, err := c.Server.SnapshotCreate()
+		snapshot, err := c.Server.SnapshotCreate("test")
 		if !assert.NoError(t, err) {
 			return
 		}
