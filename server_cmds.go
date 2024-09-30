@@ -480,7 +480,7 @@ func (s *ServerMethods) SnapshotCreate(password string) (*Snapshot, error) {
 	return r, nil
 }
 
-func (s *ServerMethods) SnapshotDeploy(version, data, password string) error {
+func (s *ServerMethods) SnapshotDeploy(version, data, password, salt string) error {
 	_, err := s.ExecCmd(
 		NewCmd("serversnapshotdeploy").
 			WithOptions("-keepfiles").
@@ -488,6 +488,7 @@ func (s *ServerMethods) SnapshotDeploy(version, data, password string) error {
 				NewArg("version", version),
 				NewArg("password", password),
 				NewArg("data", data),
+				NewArg("salt", salt),
 			))
 	return err
 }
