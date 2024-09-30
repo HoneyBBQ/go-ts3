@@ -464,7 +464,7 @@ func (s *ServerMethods) ClientDBList() ([]*DBClient, error) {
 }
 
 type Snapshot struct {
-	Version int    `ms:"version"`
+	Version string `ms:"version"`
 	Data    string `ms:"data"`
 	Salt    string `ms:"salt"`
 }
